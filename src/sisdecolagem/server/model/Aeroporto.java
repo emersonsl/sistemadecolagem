@@ -15,7 +15,7 @@ import java.util.List;
 public class Aeroporto {
     private String cidade;
     private boolean visitado;
-    private List <Aeroporto> destinos;
+    private List <Trecho> trechos;
 
     /**
      * Construtor da classe
@@ -23,7 +23,8 @@ public class Aeroporto {
      */
     public Aeroporto(String cidade) {
         this.cidade = cidade;
-        this.destinos = new ArrayList<>();
+        this.visitado = false;
+        this.trechos = new ArrayList<>();
     }
     
     /**
@@ -68,13 +69,19 @@ public class Aeroporto {
     }
     
     /**
-     * Adiciona um destino se ainda não existir
+     * Adiciona um thecho se ainda não existir
      * @param a 
      */
-    public void addDestino(Aeroporto a){
-        if(!this.destinos.contains(a)){ //derifica se o destino não existe
-            this.destinos.add(a); //adiciona o destino
+    public void addTrecho(Trecho a){
+        if(!this.trechos.contains(a)){ //derifica se o destino não existe
+            this.trechos.add(a); //adiciona o destino
         }
     }
+
+    public List<Trecho> getTrechos() {
+        return trechos;
+    }
+    
+    
 
 }
