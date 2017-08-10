@@ -5,6 +5,7 @@
  */
 package sisdecolagem.server.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -15,7 +16,7 @@ import sisdecolagem.server.model.Trecho;
  *
  * @author emerson
  */
-public class Grafo {
+public class Grafo implements Serializable{
 
     private List<Aeroporto> aeroportos;
 
@@ -29,23 +30,25 @@ public class Grafo {
     /**
      * Adiciona um novo aeroporto quase não exista
      *
-     * @param a
+     * @param cidade
+     * @return o aeroporto cadastrado
      */
-    public void addAeroporto(Aeroporto a) {
-        if (!this.aeroportos.contains(a)) {
-            aeroportos.add(a);
+    public Aeroporto addAeroporto(String cidade) {
+        if (this.buscarAeroporto(cidade)==null) {
+            aeroportos.add(new Aeroporto(cidade));
         }
+        return this.buscarAeroporto(cidade);
     }
 
     /**
      * Busca um nó na lista
      *
-     * @param a
+     * @param cidade
      * @return
      */
-    public Aeroporto buscarAeroporto(Aeroporto a) {
+    public Aeroporto buscarAeroporto(String cidade) {
         for (Aeroporto o : aeroportos) {
-            if (o.equals(a)) {
+            if (o.getCidade().equals(cidade)) {
                 return o; //retorna o no encontrado;
             }
         }
@@ -71,11 +74,14 @@ public class Grafo {
     /**
      * Busca os caminhos a partir de origem destino
      *
-     * @param origem
-     * @param destino
+     * @param ori origem
+     * @param des destino
      * @return
      */
-    public List<Stack> buscarCaminhos(Aeroporto origem, Aeroporto destino) {
+    public List<Stack> buscarCaminhos(String ori, String des) {
+        Aeroporto origem = buscarAeroporto(ori);
+        Aeroporto destino = buscarAeroporto(des);
+        
         List<Stack> caminhos = new ArrayList<>();
         Stack<Aeroporto> pilhaMain = new Stack();
 
@@ -84,11 +90,12 @@ public class Grafo {
         }
 
         origem.setVisitado(true);
+        origem.setVisitado(true);
         pilhaMain.push(origem);
 
         while (!pilhaMain.isEmpty()) {
             Aeroporto adjacente = getAdjacenteNaoVizitado(pilhaMain.peek());
-
+            
             if (adjacente == null) {
                 pilhaMain.pop();
             } else {
@@ -115,7 +122,7 @@ public class Grafo {
         for (Aeroporto a : aeroportos) {
             saida.append(a.getCidade()).append(" : ");
             for (Trecho t : a.getTrechos()) {
-                saida.append(t.getDestino()).append(" ");
+                saida.append(t.getDestino().getCidade()).append(" ");
             }
             saida.append("\n");
         }

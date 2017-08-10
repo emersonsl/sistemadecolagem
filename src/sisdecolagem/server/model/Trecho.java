@@ -5,23 +5,27 @@
  */
 package sisdecolagem.server.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author emerson
  */
-public class Trecho {
+public class Trecho implements Serializable{
     
     private String companhia;
     private Aeroporto destino;
+    private int numPass;
 
     /**
      * Construtor da classe
      * @param companhia
      * @param destino 
      */
-    public Trecho(String companhia, Aeroporto destino) {
+    public Trecho(String companhia, Aeroporto destino, int numPass) {
         this.companhia = companhia;
         this.destino = destino;
+        this.numPass = numPass;
     }
 
     /**
@@ -55,15 +59,32 @@ public class Trecho {
     public void setDestino(Aeroporto destino) {
         this.destino = destino;
     }
+
+    /**
+     * Retorna o numero de passagens
+     * @return 
+     */
+    public int getNumPass() {
+        return numPass;
+    }
+
+    /**
+     * Altera o numero de passagens
+     * @param numPass 
+     */
+    public void setNumPass(int numPass) {
+        this.numPass = numPass;
+    }
     
     /**
      * Verifica se esse trecho é igual a outro recebido por parametro
      * @param t
      * @return 
      */
-    public boolean equals(Trecho t){
-        if(this.getCompanhia().equals(t.getCompanhia())){
-            if(this.getDestino().equals(t.getDestino())){
+    @Override
+    public boolean equals(Object t){
+        if(this.getCompanhia().equals(((Trecho)t).getCompanhia())){
+            if(this.getDestino().equals(((Trecho)t).getDestino())){
                 return true;
             }
         }

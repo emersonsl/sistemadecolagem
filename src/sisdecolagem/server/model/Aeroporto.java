@@ -5,6 +5,7 @@
  */
 package sisdecolagem.server.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author emerson
  */
-public class Aeroporto {
+public class Aeroporto implements Serializable{
     private String cidade;
     private boolean visitado;
     private List <Trecho> trechos;
@@ -64,8 +65,9 @@ public class Aeroporto {
      * @param a
      * @return 
      */
-    public boolean equals(Aeroporto a){
-        return a.getCidade().equals(this.getCidade()); //compara se o aeroporto é igual, pelo nome da cidade
+    @Override
+    public boolean equals(Object a){
+        return ((Aeroporto)a).getCidade().equals(this.getCidade()); //compara se o aeroporto é igual, pelo nome da cidade
     }
     
     /**
@@ -73,7 +75,7 @@ public class Aeroporto {
      * @param a 
      */
     public void addTrecho(Trecho a){
-        if(!this.trechos.contains(a)){ //derifica se o destino não existe
+        if(!this.trechos.isEmpty() || !this.trechos.contains(a)){ //derifica se o destino não existe
             this.trechos.add(a); //adiciona o destino
         }
     }

@@ -5,6 +5,9 @@
  */
 package sisdecolagem.server.main;
 
+import sisdecolagem.server.DAO.RecuperarDAO;
+import sisdecolagem.server.control.Controller;
+
 /**
  *
  * @author emerson
@@ -15,7 +18,9 @@ public class SisDecolagemServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Controller c = Controller.getInstance();
+        RecuperarDAO.recuperarDados();
+        c.imprimir();
     }
     
 }
