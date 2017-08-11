@@ -83,9 +83,11 @@ public class Trecho implements Serializable{
      */
     @Override
     public boolean equals(Object t){
-        if(this.getCompanhia().equals(((Trecho)t).getCompanhia())){
-            if(this.getDestino().equals(((Trecho)t).getDestino())){
-                return true;
+        if(t instanceof Trecho){
+            if(this.getCompanhia().equals(((Trecho)t).getCompanhia())){
+                if(this.getDestino().equals(((Trecho)t).getDestino())){
+                    return true;
+                }
             }
         }
         return false;

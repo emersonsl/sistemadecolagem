@@ -90,7 +90,6 @@ public class Grafo implements Serializable{
         }
 
         origem.setVisitado(true);
-        origem.setVisitado(true);
         pilhaMain.push(origem);
 
         while (!pilhaMain.isEmpty()) {
@@ -100,14 +99,20 @@ public class Grafo implements Serializable{
                 pilhaMain.pop();
             } else {
                 adjacente.setVisitado(true);
-                pilhaMain.push(adjacente);
-                if (adjacente.equals(destino)) {// se o vizinho for o destino salve uma copia da pilha
+                pilhaMain.push(buscarAeroporto(adjacente.getCidade()));
+                if (adjacente.getCidade().equals(destino.getCidade())) {// se o vizinho for o destino salve uma copia da pilha
                     caminhos.add((Stack) pilhaMain.clone());
                 }
             }
         }
 
         return caminhos;
+    }
+    
+    public void demarcarNos(){
+        for(Aeroporto a: aeroportos){
+            a.setVisitado(false);
+        }
     }
 
     /**

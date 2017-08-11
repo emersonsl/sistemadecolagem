@@ -75,7 +75,8 @@ public class Aeroporto implements Serializable{
      * @param a 
      */
     public void addTrecho(Trecho a){
-        if(!this.trechos.isEmpty() || !this.trechos.contains(a)){ //derifica se o destino não existe
+        if(this.trechos.isEmpty() || !this.trechos.contains(a)){ //derifica se o destino não existe
+            System.out.println("add: "+this.cidade+"->"+a.getDestino().cidade);
             this.trechos.add(a); //adiciona o destino
         }
     }

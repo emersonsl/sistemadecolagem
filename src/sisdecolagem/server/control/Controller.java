@@ -26,6 +26,7 @@ public class Controller {
      */
     private Controller(){
         grafo = new Grafo();
+        companhia = "a";
     }
     
     /**
@@ -49,21 +50,28 @@ public class Controller {
         Aeroporto origemA =  grafo.addAeroporto(origem); //adiciona o aeroporto de origem caso não exista
         Aeroporto destinoA = grafo.addAeroporto(destino); //adiciona o aeroporto de destino caso não exista
         
-        origemA.addTrecho(new Trecho(companhia, destinoA, numPass)); //adiciona o novo trecho
+        origemA.addTrecho(new Trecho(companhia, new Aeroporto(destino), numPass)); //adiciona o novo trecho
     }
     
     
     public void imprimir(){
         
         
-        List <Stack> caminhos = grafo.buscarCaminhos("7", "9");
+        List <Stack> caminhos = grafo.buscarCaminhos("G", "I");
         Stack <Aeroporto> p1 = caminhos.get(0);
         Stack <Aeroporto> p2 = caminhos.get(1);
         
-        for(Aeroporto a: p1){
-            System.out.print(a.getCidade()+"->");
+        
+        for(Stack <Aeroporto> s: caminhos){
+            for(Aeroporto a: s){
+                System.out.print(a.getCidade()+"->");
+            }
+            System.out.println();
         }
-     
+        
+        
+        
+        
     }
    
 }

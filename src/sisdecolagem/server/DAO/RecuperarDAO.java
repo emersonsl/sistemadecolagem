@@ -40,15 +40,13 @@ public class RecuperarDAO {
                 
                 linha = lerArq.readLine();
             }
+            arq.close();
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(RecuperarDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(RecuperarDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
+        }    
     }
             
 }
