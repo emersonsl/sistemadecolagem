@@ -9,24 +9,26 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sisdecolagem.server.control.Controller;
+import sisdecolagem.server.control.ControllerServidor;
 
 /**
  *
  * @author emerson
  */
 public class RecuperarDAO {
+    
+    /**
+     * Recupera os trechos do arquivo
+     */
     public static void recuperarDados(){
-        Controller controller = Controller.getInstance();
+        ControllerServidor controller = ControllerServidor.getInstance();
         
         try {
-            FileReader arq = new FileReader("arquivo.txt");
+            FileReader arq = new FileReader("rotas.txt");
             BufferedReader lerArq = new BufferedReader(arq);
-            String linha = new String();
+            String linha;
             
             linha = lerArq.readLine();
             while(linha!=null){
@@ -43,10 +45,34 @@ public class RecuperarDAO {
             arq.close();
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(RecuperarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Exceção: "+ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(RecuperarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Exceção: "+ex.getMessage());
         }    
     }
+    
+    /**
+     * Recupera os servidores do arquivo
+     */
+    public static void recuperarServidores(){
+        ControllerServidor controller = ControllerServidor.getInstance();
+        
+        try {
+            FileReader arq = new FileReader("servidores.txt");
+            BufferedReader lerArq = new BufferedReader(arq);
+            String linha;
             
+            linha = lerArq.readLine();
+            while(linha!=null){
+                controller.addServidor(linha);
+                linha = lerArq.readLine();
+            }
+            arq.close();
+            
+        } catch (FileNotFoundException ex) {
+            System.err.println("Exceção: "+ex.getMessage());
+        } catch (IOException ex) {
+            System.err.println("Exceção: "+ex.getMessage());
+        }
+    }        
 }
