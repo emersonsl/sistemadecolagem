@@ -102,7 +102,7 @@ public class ControllerServidor {
         try {
             IServidor server = (IServidor) Naming.lookup("rmi://" + ip + ":1099/server");
             servidores.add(server);
-            System.out.println(server.getCompanhia());
+            System.out.println("Adicionada Companhia: "+server.getCompanhia());
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             System.out.println("Erro ao Add servidor: " + ip);
             System.err.println(ex);

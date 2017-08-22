@@ -29,13 +29,10 @@ public class SisDecolagemServer {
         
         RecuperarDAO.recuperarDados();
         
-        Implementacao servidor = new Implementacao();
-        servidor.iniciarServicoServidor("server");
+        
         
         System.out.println("Serviço servidor iniciado");
         
-        Implementacao cliente = new Implementacao();
-        cliente.iniciarServicoCliente("cliente");
         
         System.out.println("Serviço cliente iniciado");
         

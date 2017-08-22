@@ -2,8 +2,9 @@ G:H:0
 G:K:1
 E:K:0
 K:B:0
-K:I:0
+K:I:1
 K:J:0
 H:I:0
 C:J:0
 C:H:0
+I:A:1

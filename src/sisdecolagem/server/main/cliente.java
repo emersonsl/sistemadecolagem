@@ -24,8 +24,8 @@ public class cliente {
     public static void main(String [] args){
         try {
             ICliente server = (ICliente) Naming.lookup("rmi://127.0.0.1/cliente");
-            List <Stack> lista = server.buscarCaminhos("G", "I");
-            if(server.comprarPassagem(lista.get(1))){
+            List <Stack> lista = server.buscarCaminhos("G", "A");
+            if(server.comprarPassagem(lista.get(0))){
                 System.out.println("comprado");
             }
             
