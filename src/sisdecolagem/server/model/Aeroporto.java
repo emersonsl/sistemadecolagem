@@ -7,6 +7,7 @@ package sisdecolagem.server.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -67,7 +68,9 @@ public class Aeroporto implements Serializable{
      */
     @Override
     public boolean equals(Object a){
-        return ((Aeroporto)a).getCidade().equals(this.getCidade()); //compara se o aeroporto é igual, pelo nome da cidade
+        if(a instanceof Aeroporto)
+            return ((Aeroporto)a).getCidade().equals(this.getCidade()); //compara se o aeroporto é igual, pelo nome da cidade
+        return false;
     }
     
     /**
@@ -75,16 +78,38 @@ public class Aeroporto implements Serializable{
      * @param a 
      */
     public void addTrecho(Trecho a){
-        if(this.trechos.isEmpty() || !this.trechos.contains(a)){ //derifica se o destino não existe
+        if(this.trechos.isEmpty() || !this.trechos.contains(a)){ //verifica se o destino não existe
             System.out.println("add: "+this.cidade+"->"+a.getDestino().cidade);
             this.trechos.add(a); //adiciona o destino
         }
     }
 
+    /**
+     * Retorna os trechos deste aeroporto
+     * @return 
+     */
     public List<Trecho> getTrechos() {
         return trechos;
     }
     
     
-
+    public Trecho getTrecho(Aeroporto a){
+        for(Trecho t: trechos){
+            if(t.getDestino().equals(a)){
+                return t;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Retorna texto para impressão do objeto
+     * @return 
+     */
+    @Override
+    public String toString(){
+        StringBuilder s = new StringBuilder();
+        s.append("Cidade: ").append(this.cidade);
+        return s.toString();
+    }
 }

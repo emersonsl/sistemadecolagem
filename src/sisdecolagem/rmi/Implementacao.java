@@ -13,7 +13,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.Stack;
 import sisdecolagem.server.control.ControllerServidor;
+import sisdecolagem.server.model.Aeroporto;
 import sisdecolagem.server.util.Grafo;
 
 /**
@@ -69,7 +71,7 @@ public class Implementacao extends UnicastRemoteObject implements ICliente, ISer
      * @throws RemoteException 
      */
     @Override
-    public List<String> buscarCaminhos(String origem, String destino) throws RemoteException {
+    public List<Stack> buscarCaminhos(String origem, String destino) throws RemoteException {
         return ControllerServidor.getInstance().buscarTrecho(origem, destino);
     }
 
@@ -81,6 +83,21 @@ public class Implementacao extends UnicastRemoteObject implements ICliente, ISer
     @Override
     public String getCompanhia() throws RemoteException {
         return ControllerServidor.getInstance().getCompanhia();
+    }
+
+    @Override
+    public boolean comprarPassagem(Stack<Aeroporto> pilha) throws RemoteException {
+        return ControllerServidor.getInstance().comprarPassagem(pilha);
+    }
+
+    @Override
+    public boolean comprarTrecho(Aeroporto origem, Aeroporto destino) throws RemoteException {
+        return ControllerServidor.getInstance().comprarTrecho(origem, destino);
+    }
+
+    @Override
+    public void cancelarCompraTrecho(Aeroporto origem, Aeroporto destino) throws RemoteException {
+        ControllerServidor.getInstance().cancelarCompraTrecho(origem, destino);
     }
     
 }

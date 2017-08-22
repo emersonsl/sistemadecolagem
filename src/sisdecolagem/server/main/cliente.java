@@ -10,9 +10,11 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sisdecolagem.rmi.ICliente;
+import sisdecolagem.server.model.Aeroporto;
 
 /**
  *
@@ -21,12 +23,16 @@ import sisdecolagem.rmi.ICliente;
 public class cliente {
     public static void main(String [] args){
         try {
-            ICliente server = (ICliente) Naming.lookup("rmi://127.0.0.1:1099/cliente");
-            List<String> lista = server.buscarCaminhos("G", "I");
-            
-            for(String s: lista){
-                System.out.println("Caminho: " +s );
+            ICliente server = (ICliente) Naming.lookup("rmi://127.0.0.1/cliente");
+            List <Stack> lista = server.buscarCaminhos("G", "I");
+            if(server.comprarPassagem(lista.get(1))){
+                System.out.println("comprado");
             }
+            
+            if(lista.isEmpty())
+                System.out.println("Nenhuma rota disponivel");
+            else
+                System.out.println(lista);
             
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             Logger.getLogger(cliente.class.getName()).log(Level.SEVERE, null, ex);

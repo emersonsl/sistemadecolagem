@@ -28,6 +28,14 @@ public class Grafo implements Serializable{
     }
 
     /**
+     * Retorna a lista de aeroportos
+     * @return 
+     */
+    public List<Aeroporto> getAeroportos() {
+        return aeroportos;
+    }
+    
+    /**
      * Adiciona um novo aeroporto quase não exista
      *
      * @param cidade
@@ -38,6 +46,25 @@ public class Grafo implements Serializable{
             aeroportos.add(new Aeroporto(cidade));
         }
         return this.buscarAeroporto(cidade);
+    }
+    
+    /**
+     * Adiciona um aeroporto e seus trechos
+     * @param aeroporto
+     * @return 
+     */
+    public Aeroporto addAeroporto(Aeroporto aeroporto){
+        Aeroporto a = buscarAeroporto(aeroporto.getCidade());
+        
+        if(a==null){ //verifica se o aeroporto não existe
+            aeroportos.add(aeroporto);
+        }else{ //caso não exista adiciona os trechos
+            for(Trecho t: aeroporto.getTrechos()){
+                a.addTrecho(t);
+            }
+            aeroporto = a;
+        }
+        return aeroporto;
     }
 
     /**
@@ -85,7 +112,7 @@ public class Grafo implements Serializable{
         List<Stack> caminhos = new ArrayList<>();
         Stack<Aeroporto> pilhaMain = new Stack();
 
-        if (aeroportos.isEmpty()) { //se a lista de nós estiver vazia retorna uma lista vazia
+        if (aeroportos.isEmpty() || origem == null || destino == null) { //se a lista de nós estiver vazia retorna uma lista vazia
             return caminhos;
         }
 
@@ -106,12 +133,19 @@ public class Grafo implements Serializable{
             }
         }
 
+        desmarcarNos();
         return caminhos;
     }
     
-    public void demarcarNos(){
+    /**
+     * Desmarca todos os nós vizitados
+     */
+    public void desmarcarNos(){
         for(Aeroporto a: aeroportos){
-            a.setVisitado(false);
+            for(Trecho t: a.getTrechos()){
+                t.getDestino().setVisitado(false); //desmarca o destino do trecho
+            }
+            a.setVisitado(false); //desmarca a origem do trecho
         }
     }
 

@@ -7,8 +7,6 @@ package sisdecolagem.server.main;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sisdecolagem.rmi.Implementacao;
 import sisdecolagem.server.DAO.RecuperarDAO;
 import sisdecolagem.server.control.ControllerServidor;

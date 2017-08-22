@@ -92,4 +92,13 @@ public class Trecho implements Serializable{
         }
         return false;
     }
+    
+    @Override
+    public String toString(){
+        StringBuilder s = new StringBuilder();
+        s.append("\nDestino: ").append(this.destino)
+         .append("\nCompanhia: ").append(this.companhia)
+         .append("\nQuantidade de Assentos: ").append(this.numPass).append("\n");
+        return s.toString();
+    }
 }

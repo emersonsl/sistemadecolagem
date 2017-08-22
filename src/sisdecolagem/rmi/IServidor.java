@@ -7,6 +7,7 @@ package sisdecolagem.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import sisdecolagem.server.model.Aeroporto;
 import sisdecolagem.server.util.Grafo;
 
 /**
@@ -16,4 +17,6 @@ import sisdecolagem.server.util.Grafo;
 public interface IServidor extends Remote{
     public Grafo getGrafo() throws RemoteException;
     public String getCompanhia() throws RemoteException;
+    public boolean comprarTrecho(Aeroporto origem, Aeroporto destino) throws RemoteException;
+    public void cancelarCompraTrecho(Aeroporto origem, Aeroporto destino) throws RemoteException;
 }
