@@ -142,6 +142,10 @@ public class GUICliente extends javax.swing.JFrame {
     public List<Stack> getLista(){
         return caminhos;
     }
+    
+    public boolean comprarPassagem(Stack pilha) throws RemoteException{
+        return server.comprarPassagem(pilha);
+    }
     /**
      * @param args the command line arguments
      */

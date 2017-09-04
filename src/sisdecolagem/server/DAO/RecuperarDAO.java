@@ -56,6 +56,7 @@ public class RecuperarDAO {
      */
     public static void recuperarServidores(){
         ControllerServidor controller = ControllerServidor.getInstance();
+        controller.limparListaServidores();
         
         try {
             FileReader arq = new FileReader("servidores.txt");

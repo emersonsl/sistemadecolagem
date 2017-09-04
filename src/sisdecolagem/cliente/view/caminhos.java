@@ -5,9 +5,13 @@
  */
 package sisdecolagem.cliente.view;
 
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Stack;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import sisdecolagem.server.model.Aeroporto;
 
 /**
@@ -16,6 +20,7 @@ import sisdecolagem.server.model.Aeroporto;
  */
 public class caminhos extends javax.swing.JDialog {
 
+    GUICliente telaPai;
     List <Stack> lista;
     
     /**
@@ -23,7 +28,8 @@ public class caminhos extends javax.swing.JDialog {
      */
     public caminhos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.lista = ((GUICliente)parent).getLista();
+        telaPai = ((GUICliente)parent);
+        this.lista = telaPai.getLista();
         initComponents();
         exibirTrechos();
     }
@@ -84,6 +90,11 @@ public class caminhos extends javax.swing.JDialog {
         });
 
         ok.setText("OK");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
 
         selecione.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         selecione.setText("Selecione aqui");
@@ -131,6 +142,19 @@ public class caminhos extends javax.swing.JDialog {
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboActionPerformed
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        try {
+            
+            if(telaPai.comprarPassagem(lista.get(combo.getSelectedIndex()))){
+                JOptionPane.showMessageDialog(null, "Compra efetuada com sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Não foi possivel realizar compra");
+            }
+        } catch (RemoteException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na comunicação: \n"+ex);
+        }
+    }//GEN-LAST:event_okActionPerformed
 
     /**
      * @param args the command line arguments

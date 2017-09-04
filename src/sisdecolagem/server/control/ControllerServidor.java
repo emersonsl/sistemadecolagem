@@ -9,9 +9,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 import sisdecolagem.rmi.IServidor;
@@ -109,7 +107,19 @@ public class ControllerServidor {
         }
 
     }
+    
+    /**
+     * Limpa a lista de servidores
+     */
+    public void limparListaServidores(){
+        servidores = new ArrayList<>();
+    }
 
+    /**
+     * Monta um grafo geral com o grafo de todos os servidores
+     * @return
+     * @throws RemoteException 
+     */
     public Grafo montarGrafoGeral() throws RemoteException {
         List<Grafo> grafos = new ArrayList<>();
         Grafo grafo = new Grafo();
@@ -204,6 +214,13 @@ public class ControllerServidor {
         return false;
     }
 
+    /**
+     * Libera techos de uma pilha até certo ponto
+     * quando uma compra falha
+     * @param pilha
+     * @param ultimoElemento
+     * @throws RemoteException 
+     */
     private void liberarTrechos(Stack<Aeroporto> pilha, Aeroporto ultimoElemento) throws RemoteException {
         if (pilha.size() > 1) {
             Aeroporto aux = pilha.get(0);
@@ -236,6 +253,11 @@ public class ControllerServidor {
         }
     }
 
+    /**
+     * Cancela compra de trechos nesse servidor
+     * @param origem
+     * @param destino 
+     */
     public void cancelarCompraTrecho(Aeroporto origem, Aeroporto destino) {
         origem = grafo.buscarAeroporto(origem.getCidade());
         Trecho t = origem.getTrecho(destino);

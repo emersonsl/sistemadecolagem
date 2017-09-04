@@ -113,7 +113,7 @@ public class GUIServer extends javax.swing.JFrame {
     }//GEN-LAST:event_nomeCompanhiaActionPerformed
 
     private void conectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarActionPerformed
-        // TODO add your handling code here:
+        RecuperarDAO.recuperarServidores();
     }//GEN-LAST:event_conectarActionPerformed
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
